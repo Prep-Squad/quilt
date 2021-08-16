@@ -6,9 +6,12 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
 
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="username">Enter a username</label>
         <input name="username" value={username} onChange={setUsername} />
         <label htmlFor="email">Enter your email</label>
