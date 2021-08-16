@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { auth } from '../firebase/firebaseIndex'
 import Error from './Error'
+import { useHistory } from 'react-router-dom'
 
 
 function SignUp(props) {
@@ -9,6 +10,7 @@ function SignUp(props) {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [error, setError] = useState('')
+  const history = useHistory()
 
  async function handleSubmit(e) {
     e.preventDefault();
@@ -17,10 +19,11 @@ function SignUp(props) {
       setError(`Ya passwords dont match ya dingus!`)
     }
     await auth.createUserWithEmailAndPassword(email, password).then((result) => {
-    props.history.push('/')
+    history.push('/login')
   }).catch((error)=>{
       console.log(error)
-      if (error.code.includes('auth/weak-password')) {
+      if(error.code)
+      {if (error.code.includes('auth/weak-password')) {
         setError(
           `It is not the strength of the body, but the strength of the spirit. ...and also your password. Please make it stronger.`
         );
@@ -30,7 +33,7 @@ function SignUp(props) {
         setError(
           'Unable to register.'
         );
-    }
+    }}
   })
 }
 
