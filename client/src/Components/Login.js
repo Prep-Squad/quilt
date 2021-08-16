@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
 import Error from './Error'
 import { auth } from '../firebase/firebaseIndex'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+
 
 export default function Login(props) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
+    const history = useHistory()
 
     async function handleSubmit(e){
         e.preventDefault()
         if(error !== '') setError('');
         await auth.signInWithEmailAndPassword(email, password).then((result) =>{
             window.localStorage.setItem('id', `${result.user.uid}`)
-            props.history.push('/')
+            history.push('/')
         }).catch((error)=>{
             console.log(error)
             setError('Not able to sign in! Please try again :)')
