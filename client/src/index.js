@@ -2,16 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router } from 'react-router-dom'
-import Routes from './Components/Routes'
-import history from './history'
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from './Components/Routes';
+import history from './history';
+import { Provider } from 'react-redux';
+import store from './store/index';
 
 ReactDOM.render(
-  <Router history={history}>
-  {/* <React.StrictMode> */}
-    <Routes />
-  {/* </React.StrictMode> */}
-  </Router>,
+  <Provider store={store}>
+    <Router history={history}>
+      {/* <React.StrictMode> */}
+      <Routes />
+      {/* </React.StrictMode> */}
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 
