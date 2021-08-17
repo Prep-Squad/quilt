@@ -1,16 +1,18 @@
-import { auth } from '../firebase/firebaseIndex';
-
 const SET_AUTH = 'SET_AUTH';
+export const CHECK_AUTH = 'CHECK_AUTH';
+// const CLEAR_USER = 'CLEAR_USER'
 
-const setAuth = (user) => ({
-  type: SET_AUTH,
-  user,
-});
+export const setAuth = (user) => {
+  return {
+    type: SET_AUTH,
+    user,
+  };
+};
 
 export default function authReducer(state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
-      return action.auth;
+      return action.user;
     default:
       return state;
   }
