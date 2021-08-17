@@ -17,8 +17,3 @@ sagaMiddleware.run(rootSaga);
 
 export default store;
 //export * from './auth';
-
-//check auth -- dispatch "check auth"
-// listener for 'check auth'
-//check auth will check the firebase user
-//dispatch set auth
