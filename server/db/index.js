@@ -17,12 +17,11 @@ Image.hasMany(Post);
 Post.belongsTo(User);
 User.hasMany(Post);
 
-module.exports = {
-  db,
-  models: {
+module.exports = { 
+    db,
     Like,
     User,
     Image,
     Post,
-  },
-};
+  }
+

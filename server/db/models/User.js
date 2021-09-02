@@ -5,10 +5,11 @@ const User = db.define('user', {
   firebaseId: {
     type: Sequelize.STRING,
   },
-  username: {
+  email: {
     type: Sequelize.STRING,
     validate: {
       isUnique: true,
+      isEmail: true
     },
     allowNull: false,
   },
