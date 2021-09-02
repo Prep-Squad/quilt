@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { auth } from '../firebase/firebaseIndex';
 import Error from './Error';
 import { useHistory } from 'react-router-dom';
+import { CREATE_USER } from '../store/auth';
+import { connect } from 'react-redux';
 
 function SignUp(props) {
   const [username, setUsername] = useState('');
@@ -15,11 +17,15 @@ function SignUp(props) {
     e.preventDefault();
     if (error !== '') setError('');
     if (password !== password2) {
-      setError(`Ya passwords dont match ya dingus!`);
+      setError(`Ya passwords don't match ya dingus!`);
     }
     await auth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
+        console.log(result);
+        let user = { username, email, firebaseId: result.user.uid };
+        console.log('user in create', user);
+        props.createUser(user);
         history.push('/login');
       })
       .catch((error) => {
@@ -74,4 +80,9 @@ function SignUp(props) {
   );
 }
 
-export default SignUp;
+const mapState = () => ({});
+
+const mapDispatch = (dispatch) => ({
+  createUser: (user) => dispatch({ type: CREATE_USER, user }),
+});
+export default connect(mapState, mapDispatch)(SignUp);
